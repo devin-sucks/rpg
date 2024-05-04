@@ -29,7 +29,7 @@ const Page = () => {
             </div>
 
             <div className="text-white flex flex-col space-y-4">
-                {history.length === 0 && <div>{c.completion}</div>}
+                {history.length === 0 && <div>{c.completion}</div>} 
                 {history.map((text, idx) => {
                     return (
                         <div key={idx}>
