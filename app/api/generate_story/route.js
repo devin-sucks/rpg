@@ -11,6 +11,8 @@ export async function POST(req) {
 
     const { input, history } = await req.json();
 
+    console.log(input, history);
+
     const response = await groq.chat.completions.create({
         model: "mixtral-8x7b-32768",
         messages: [
@@ -21,12 +23,14 @@ export async function POST(req) {
                 
                 The following is history of the adventure:
 
-                ${history}
+                ${JSON.stringify(history)}
                 `
             },
             {
                 "role": "user",
                 "content": `Continue the story based on the following user's action: 
+
+                100 words max
 
                 ${input}
                 `
