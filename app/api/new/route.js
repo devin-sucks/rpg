@@ -20,6 +20,8 @@ export async function POST(req) {
                 
                 Create the start of a text based adventure based on a random situation and setting...
 
+                Do not give options as to what the user can do
+
                 100 words max
 
                 RESPOND ONLY WITH THE STORY AND NOTHING ELSE
