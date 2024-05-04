@@ -39,43 +39,46 @@ const Page = () => {
     const [image_url, set_image_url] = useState()
 
     return (
-        <div className="pt-20 px-20">
-            <div className="w-full grid place-content-center">
-                <button className="" onClick={() => c.complete()}>Start</button>
-            </div>
+        <>
+            <img src={image_url} alt="" className="absolute h-screen z-[-10]" />
+            <div className="pt-20 px-20">
+                <div className="w-full grid place-content-center">
+                    <button className="" onClick={() => c.complete()}>Start</button>
+                </div>
 
-            <div className="text-white flex flex-col space-y-4">
-                {history.length === 0 && <div>{c.completion}</div>}
-                {history.map((text, idx) => {
-                    return (
-                        <div key={idx}>
-                            {text}
-                        </div>
-                    )
-                })}
-                {gc.isLoading && <div>{gc.completion}</div>}
-            </div>
+                <div className="text-white flex flex-col space-y-4">
+                    {history.length === 0 && <div>{c.completion}</div>}
+                    {history.map((text, idx) => {
+                        return (
+                            <div key={idx}>
+                                {text}
+                            </div>
+                        )
+                    })}
+                    {gc.isLoading && <div>{gc.completion}</div>}
+                </div>
 
-            <div className="">
-                <textarea
-                    onChange={e => set_input(e.target.value)}
-                    className="text-white border-gray-300 bg-opacity-15 bg-gray-400 w-full rounded-md"
-                    onKeyDown={e => {
-                        if (e.key === "Enter") {
-                            gc.complete("", {
-                                body: {
-                                    input,
-                                    history
-                                }
-                            })
-                            set_input("")
-                        }
-                    }}
-                    value={input}
-                >
-                </textarea>
+                <div className="">
+                    <textarea
+                        onChange={e => set_input(e.target.value)}
+                        className="text-white border-gray-300 bg-opacity-15 bg-gray-400 w-full rounded-md"
+                        onKeyDown={e => {
+                            if (e.key === "Enter") {
+                                gc.complete("", {
+                                    body: {
+                                        input,
+                                        history
+                                    }
+                                })
+                                set_input("")
+                            }
+                        }}
+                        value={input}
+                    >
+                    </textarea>
+                </div>
             </div>
-        </div>
+        </>
     )
 
 }
