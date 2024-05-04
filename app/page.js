@@ -2,7 +2,7 @@
 import { useCompletion } from "ai/react";
 import { useState } from "react";
 
-const generate_image = async (story) => {
+const generate_image = async (story, set_image_url) => {
 
     const response = await fetch('/api/generate_visuals', {
         method: 'POST',
@@ -11,9 +11,9 @@ const generate_image = async (story) => {
         })
     })
 
-    const body = await response.json()
+    const { image_url } = await response.json()
 
-    console.log(body);
+    set_image_url(image_url)
 }
 
 const Page = () => {
@@ -30,15 +30,16 @@ const Page = () => {
         api: '/api/generate_story',
         onFinish: (p, c) => {
             set_history(arr => [...arr, c])
+            generate_image(c, set_image_url)
         }
     })
 
     const [input, set_input] = useState("")
     const [history, set_history] = useState([])
+    const [image_url, set_image_url] = useState()
 
     return (
         <div className="pt-20 px-20">
-            <button onClick={() => generate_image(history.at(-1))}>img</button>
             <div className="w-full grid place-content-center">
                 <button className="" onClick={() => c.complete()}>Start</button>
             </div>
